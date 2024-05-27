@@ -1,0 +1,17 @@
+﻿@model List<ProjectViewModel>
+
+<div class="text-center">
+<table class="table">
+	<tr>
+		<th>Название</th>
+	</tr>
+	@foreach(var project in Model)
+	{
+		<tr>
+			<td>@project.Name</td>
+			<td><a asp-area="Admin" asp-controller="Projects" asp-action="Edit" asp-route-id="@project.Id">Редактировать</a></td>
+		</tr>
+	}
+</table>
+	
+</div>

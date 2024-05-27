@@ -18,7 +18,7 @@ namespace ItCubeVote.Controllers
 		public IActionResult Index()
 		{
 			var projects = projectsDb.GetProjects();
-			return View(Mapping.ToProjectViewsModel(projects));
+			return View(Mapping.ToProjectsViewsModel(projects));
 		}
 		public IActionResult ToConfirm(Guid MostDificult, Guid MostBeautiful, Guid Coolest)
 		{

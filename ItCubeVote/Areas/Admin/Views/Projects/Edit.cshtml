@@ -1,0 +1,21 @@
+﻿@model ProjectViewModel
+<form method="post" asp-area="Admin" asp-controller="Projects" asp-action="EditProject">
+    <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+    <div class="text-center">
+        <div>
+            <label asp-for="Name">Новое название</label>
+            <input asp-for="Name">
+            <span asp-validation-for="Name"></span>
+        </div>
+        <br>
+         <div class="invisible">
+            <label asp-for="Id">Новое название</label>
+            <input asp-for="Id">
+            <span asp-validation-for="Id"></span>
+        </div>
+        <br>
+
+
+        <button class="btn btn-primary m-2" type="submit">Изменить</button>
+    </div>
+</form>

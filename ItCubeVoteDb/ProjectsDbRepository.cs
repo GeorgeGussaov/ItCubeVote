@@ -30,6 +30,15 @@ namespace ItCubeVoteDb
 			return _dbContext.Projects.FirstOrDefault(x => x.Id == id);
 
 		}
+
+		public void RenameProject(Guid id, string newName)
+		{
+			foreach (var project in _dbContext.Projects)
+			{
+				if(project.Id == id) project.Name = newName;
+			}
+			_dbContext.SaveChanges();
+		}
 	}
 
 	public interface IProjects
@@ -37,5 +46,6 @@ namespace ItCubeVoteDb
 		public void Add(Project project);
 		public List<Project> GetProjects();
 		public Project TryGetProjectById(Guid id);
+		public void RenameProject(Guid id, string newName);
 	}
 }
