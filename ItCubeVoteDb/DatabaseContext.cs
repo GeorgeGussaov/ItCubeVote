@@ -19,8 +19,10 @@ namespace ItCubeVoteDb
         {
             modelBuilder.Entity<Project>().HasData(new List<Project>()
             {
-                new Project("First"){Id = Guid.NewGuid()}, new Project("Second"){Id = Guid.NewGuid()}
-            });
+                new Project("First"){Id = Guid.NewGuid()}, new Project("Second"){Id = Guid.NewGuid()},
+				new Project("Third"){Id = Guid.NewGuid()}, new Project("Fourth"){Id = Guid.NewGuid()},
+				new Project("Fifth"){Id = Guid.NewGuid()}
+			});
         }
     }
 }

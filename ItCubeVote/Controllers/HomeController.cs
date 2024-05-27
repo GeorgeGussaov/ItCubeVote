@@ -21,7 +21,6 @@ namespace ItCubeVote.Controllers
 
 		public IActionResult Index()
 		{
-			projects.Add(new Project("SSSS"));
 			return View();
 		}
 

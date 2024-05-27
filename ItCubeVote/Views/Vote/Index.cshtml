@@ -1,0 +1,39 @@
+﻿@model List<ProjectViewModel>
+
+<div class="text-center">
+	<form method="post">
+		<table class="table">
+			<tr>
+				<th>Название</th>
+				<th>Самый сложный</th>
+				<th>Самый красивый</th>
+				<th>Самый прикольный</th>
+			</tr>
+			@foreach(var project in Model)
+			{
+				<tr>
+					<td>@project.Name</td>
+					<td><input type="checkbox" name="MostDificult" value="@project.Id"></td>
+					<td><input type="checkbox" name="MostBeautiful" value="@project.Id"></td>
+					<td><input type="checkbox" name="Coolest" value="@project.Id"></td>
+				</tr>
+			}
+		</table>
+		<button type="submit" class="btn btn-primary" asp-controller="Vote" asp-action="ToConfirm">Подтвердить</button>
+	</form>
+	
+</div>
+<script>
+	document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+		checkbox.addEventListener('change', function() {
+			let selectedNomination = this.dataset.nomination;
+			let projectName = this.name;
+
+			document.querySelectorAll('input[name="' + projectName + '"]').forEach(function(input) {	//каюсь, скрипт взят с gpt ибо с js не работал очень давно.
+				if (input !== checkbox && input.dataset.nomination === selectedNomination) {			//еслиб начал проект делать раньше подумал бы над задачей сам, честно.
+					input.checked = false;
+				}
+			});
+		});
+	});
+</script>
