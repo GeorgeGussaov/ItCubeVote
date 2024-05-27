@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItCubeVote", "ItCubeVote\ItCubeVote.csproj", "{9077DAB4-28A9-4CF4-B409-89C963BADFF8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItCubeVoteDb", "ItCubeVoteDb\ItCubeVoteDb.csproj", "{D4C80CE9-0C37-4501-A3AA-F8A3FB52F6DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9077DAB4-28A9-4CF4-B409-89C963BADFF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9077DAB4-28A9-4CF4-B409-89C963BADFF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9077DAB4-28A9-4CF4-B409-89C963BADFF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4C80CE9-0C37-4501-A3AA-F8A3FB52F6DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4C80CE9-0C37-4501-A3AA-F8A3FB52F6DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4C80CE9-0C37-4501-A3AA-F8A3FB52F6DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4C80CE9-0C37-4501-A3AA-F8A3FB52F6DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

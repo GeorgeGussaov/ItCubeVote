@@ -1,4 +1,6 @@
 ﻿using ItCubeVote.Models;
+using ItCubeVoteDb;
+using ItCubeVoteDb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,15 +13,15 @@ namespace ItCubeVote.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
-
-		public HomeController(ILogger<HomeController> logger)
+		private readonly IProjects projects;
+		public HomeController(IProjects projects) 
 		{
-			_logger = logger;
+			this.projects = projects;
 		}
 
 		public IActionResult Index()
 		{
+			projects.Add(new Project("SSSS"));
 			return View();
 		}
 
