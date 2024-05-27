@@ -15,5 +15,10 @@ namespace ItCubeVote.Helpers
 			}
 			return projectsView;
 		}
+
+		public static Project ToProject(ProjectViewModel projectView)
+		{
+			return new Project() { Id = projectView.Id, Name = projectView.Name };
+		}
 	}
 }

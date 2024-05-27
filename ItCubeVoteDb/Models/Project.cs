@@ -6,9 +6,9 @@ namespace ItCubeVoteDb.Models
 	{
 		public Guid Id { get; set; }
 		public string Name { get; set; }
-		public Project(string Name)
-		{
-			this.Name = Name;
-		}
+		//public Project(string Name)
+		//{
+		//	this.Name = Name;
+		//}
 	}
 }

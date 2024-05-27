@@ -1,0 +1,21 @@
+﻿@model UserViewModel
+<form method="post" asp-area="Admin" asp-controller="Main" asp-action="Index">
+    <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+    <div class="text-center">
+        <div>
+            <label asp-for="Login">Логин</label>
+            <input asp-for="Login">
+            <span asp-validation-for="Login"></span>
+        </div>
+  
+        <br>
+        <div>
+            <label asp-for="Password">Пароль</label>
+            <input asp-for="Password" type="password">
+            <span asp-validation-for="Password"></span>
+        </div>
+        <br>
+
+        <button class="btn btn-primary m-2" type="submit">Войти</button>
+    </div>
+</form>

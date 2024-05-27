@@ -10,7 +10,7 @@ namespace ItCubeVoteDb
     {
         public DbSet<Project> Projects { get; set; }
         public DbSet<Vote> Votes { get; set; }
-
+        public DbSet<User> Users { get; set; }
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
             Database.EnsureCreated();
@@ -19,10 +19,18 @@ namespace ItCubeVoteDb
         {
             modelBuilder.Entity<Project>().HasData(new List<Project>()
             {
-                new Project("First"){Id = Guid.NewGuid()}, new Project("Second"){Id = Guid.NewGuid()},
-				new Project("Third"){Id = Guid.NewGuid()}, new Project("Fourth"){Id = Guid.NewGuid()},
-				new Project("Fifth"){Id = Guid.NewGuid()}
+                new Project(){Id = Guid.NewGuid(), Name = "First"},
+                new Project(){Id = Guid.NewGuid(), Name = "Second"},
+				new Project() { Id = Guid.NewGuid(), Name = "Third" }, 
+                new Project() { Id = Guid.NewGuid(), Name = "Fourth" },
+				new Project() { Id = Guid.NewGuid(), Name = "Fifth" }
 			});
-        }
+
+            modelBuilder.Entity<User>().HasData(new List<User>() 
+            {
+                new User() {Id = Guid.NewGuid(), Login="Admin", Password="Admin"}
+            });
+
+		}
     }
 }

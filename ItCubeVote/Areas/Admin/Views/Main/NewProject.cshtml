@@ -1,0 +1,15 @@
+﻿@model ProjectViewModel
+<form method="post" asp-area="Admin" asp-controller="Main" asp-action="AddNewProject">
+    <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+    <div class="text-center">
+        <div>
+            <label asp-for="Name">Название</label>
+            <input asp-for="Name">
+            <span asp-validation-for="Name"></span>
+        </div>
+  
+        <br>
+
+        <button class="btn btn-primary m-2" type="submit">Добавить</button>
+    </div>
+</form>
