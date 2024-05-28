@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ItCubeVoteDb.Models
 {
@@ -6,9 +7,9 @@ namespace ItCubeVoteDb.Models
 	{
 		public Guid Id { get; set; }
 		public string Name { get; set; }
-		//public Project(string Name)
-		//{
-		//	this.Name = Name;
-		//}
+		public string Description { get; set; }
+		public string FirsAuthor { get; set; }
+		public string SecondAuthor { get; set; }
+
 	}
 }

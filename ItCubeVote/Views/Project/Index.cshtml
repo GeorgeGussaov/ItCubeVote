@@ -1,0 +1,53 @@
+﻿@model ProjectViewModel
+
+<style>
+    .Main{
+        display:flex;
+        justify-content:space-between;
+        border-radius:30px;
+    }
+    p{
+        color:whitesmoke;
+        font-weight:700;
+    }
+    .Info{
+        
+        margin-left: 30px;
+        display:flex;
+        flex-direction:column;
+    }
+    .Description{
+        border-left:solid white 1px;
+        margin-left: 20px;
+        margin-right:auto;
+        padding: 10px;
+        
+    }
+</style>
+<div>
+    <div class="Main bg-dark">
+        <div class="Info w-25">
+            <img src="">
+            <p>Название: @Model.Name</p>
+            @if(Model.FirsAuthor == null && Model.SecondAuthor == null)
+            {
+                <p>Авторы: не указаны</p>
+            }
+            else if(Model.FirsAuthor != null && Model.SecondAuthor == null)
+            {
+                <p>Авторы: @Model.FirsAuthor</p>
+            }
+            else
+            {
+                <p>Авторы: @Model.FirsAuthor, @Model.SecondAuthor</p>
+            }
+        </div>
+        <div class="Description">
+            <p>@Model.Description</p>
+        </div>
+    </div>
+    <div class="text-center m-3">
+        <a asp-controller="Vote" asp-action="Index" class="btn btn-primary">Продолжить голосование</a>
+        <br>
+    </div>
+</div>

@@ -19,6 +19,11 @@ namespace ItCubeVote.Areas.Admin.Controllers
 			var projects = projectsDb.GetProjects();
 			return View(Mapping.ToProjectsViewsModel(projects));
 		}
+		public IActionResult Project(Guid id)
+		{
+			var project = projectsDb.TryGetProjectById(id);
+			return View(Mapping.ToProjectViewModel(project));
+		}
 		public IActionResult Edit(Guid Id)
 		{
 			var project = projectsDb.TryGetProjectById(Id);
@@ -31,7 +36,7 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				projectsDb.RenameProject(project.Id, project.Name);
+				projectsDb.EditProject(Mapping.ToProject(project));
 				return RedirectToAction("Index");
 			}
 			return View("Edit");

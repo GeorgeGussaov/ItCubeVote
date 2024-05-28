@@ -20,6 +20,7 @@ namespace ItCubeVote.Areas.Admin.Controllers
 			return View();
 		}
 
+
 		public IActionResult NewProject()
 		{
 			return View();

@@ -19,11 +19,11 @@ namespace ItCubeVoteDb
         {
             modelBuilder.Entity<Project>().HasData(new List<Project>()
             {
-                new Project(){Id = Guid.NewGuid(), Name = "First"},
-                new Project(){Id = Guid.NewGuid(), Name = "Second"},
-				new Project() { Id = Guid.NewGuid(), Name = "Third" }, 
-                new Project() { Id = Guid.NewGuid(), Name = "Fourth" },
-				new Project() { Id = Guid.NewGuid(), Name = "Fifth" }
+                new Project(){Id = Guid.NewGuid(), Name = "First", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор"},
+                new Project(){Id = Guid.NewGuid(), Name = "Second", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор"},
+				new Project() { Id = Guid.NewGuid(), Name = "Third", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор" }, 
+                new Project() { Id = Guid.NewGuid(), Name = "Fourth", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор" },
+				new Project() { Id = Guid.NewGuid(), Name = "Fifth", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор" }
 			});
 
             modelBuilder.Entity<User>().HasData(new List<User>() 

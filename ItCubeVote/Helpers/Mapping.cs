@@ -11,18 +11,24 @@ namespace ItCubeVote.Helpers
 			var projectsView = new List<ProjectViewModel>();
 			foreach (var project in projects)
 			{
-				projectsView.Add(new ProjectViewModel() { Name = project.Name, Id=project.Id });
+				projectsView.Add(new ProjectViewModel() { Name = project.Name, Id=project.Id,
+					Description = project.Description,
+					FirsAuthor = project.FirsAuthor,
+					SecondAuthor = project.SecondAuthor
+				});
 			}
 			return projectsView;
 		}
 
 		public static Project ToProject(ProjectViewModel projectView)
 		{
-			return new Project() { Id = projectView.Id, Name = projectView.Name };
+			return new Project() { Id = projectView.Id, Name = projectView.Name, Description = projectView.Description,
+				FirsAuthor=projectView.FirsAuthor, SecondAuthor= projectView.SecondAuthor };
 		}
 		public static ProjectViewModel ToProjectViewModel(Project project)
 		{
-			return new ProjectViewModel() { Id = project.Id, Name = project.Name };
+			return new ProjectViewModel() { Id = project.Id, Name = project.Name, Description = project.Description,
+				FirsAuthor = project.FirsAuthor, SecondAuthor = project.SecondAuthor };
 		}
 	}
 }

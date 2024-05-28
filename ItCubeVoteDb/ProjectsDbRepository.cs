@@ -31,11 +31,17 @@ namespace ItCubeVoteDb
 
 		}
 
-		public void RenameProject(Guid id, string newName)
+		public void EditProject(Project project)
 		{
-			foreach (var project in _dbContext.Projects)
+			foreach (var pr in _dbContext.Projects)
 			{
-				if(project.Id == id) project.Name = newName;
+				if(pr.Id == project.Id)
+				{
+					pr.Name = project.Name;
+					pr.Description = project.Description;
+					pr.FirsAuthor = project.FirsAuthor;
+					pr.SecondAuthor = project.SecondAuthor;
+				}
 			}
 			_dbContext.SaveChanges();
 		}
@@ -46,6 +52,6 @@ namespace ItCubeVoteDb
 		public void Add(Project project);
 		public List<Project> GetProjects();
 		public Project TryGetProjectById(Guid id);
-		public void RenameProject(Guid id, string newName);
+		public void EditProject(Project project);
 	}
 }

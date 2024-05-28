@@ -1,5 +1,5 @@
 ﻿@model List<ProjectViewModel>
-
+@{int strNum = 1;}
 <div class="text-center">
 	<form method="post">
 		<table class="table">
@@ -12,10 +12,10 @@
 			@foreach(var project in Model)
 			{
 				<tr>
-					<td>@project.Name</td>
-					<td><input type="checkbox" name="MostDificult" value="@project.Id"></td>
-					<td><input type="checkbox" name="MostBeautiful" value="@project.Id"></td>
-					<td><input type="checkbox" name="Coolest" value="@project.Id"></td>
+					<td><a asp-controller="Project" asp-action="Index" asp-route-id="@project.Id" class="btn btn-primary">@project.Name</a></td>
+					<td><input type="checkbox" name="MostDificult" value="@project.Id" id="@strNum"></td>
+					<td><input type="checkbox" name="MostBeautiful" value="@project.Id" id="@strNum"></td>
+					<td><input type="checkbox" name="Coolest" value="@project.Id" id="@(strNum++)"></td>
 				</tr>
 			}
 		</table>
@@ -28,9 +28,16 @@
 		checkbox.addEventListener('change', function() {
 			let selectedNomination = this.dataset.nomination;
 			let projectName = this.name;
+			let currentId = this.id;
 
 			document.querySelectorAll('input[name="' + projectName + '"]').forEach(function(input) {	//каюсь, скрипт взят с gpt ибо с js не работал очень давно.
 				if (input !== checkbox && input.dataset.nomination === selectedNomination) {			//еслиб начал проект делать раньше подумал бы над задачей сам, честно.
+					input.checked = false;
+				}
+			});
+
+			document.querySelectorAll('input[id="'+ currentId + '"]').forEach(function(input){			//а вот эту часть уже дописывал сам, ссылаясь на верхнюю.
+				if(currentId == input.id && projectName != input.name){
 					input.checked = false;
 				}
 			});
