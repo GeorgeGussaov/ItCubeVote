@@ -33,6 +33,24 @@ namespace ItCubeVote.Helpers
 
 
 
+		public static List<VoteViewModel> ToVotesViewModel(List<Vote> votes)
+		{
+			var result = new List<VoteViewModel>();
+			foreach(var vote in votes)
+			{
+				result.Add(new VoteViewModel() 
+				{
+					Id=vote.Id,
+					User = vote.User,
+					MostBeautiful = vote.MostBeautiful,
+					MostDificult = vote.MostDificult,
+					Coolest = vote.Coolest
+				});
+			}
+			return result;
+		}
+
+
 
 
 

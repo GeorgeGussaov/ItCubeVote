@@ -1,6 +1,7 @@
 ﻿using ItCubeVoteDb.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ItCubeVoteDb
@@ -17,10 +18,15 @@ namespace ItCubeVoteDb
 			_dbContext.Add(vote);
 			_dbContext.SaveChanges();
 		}
+		public List<Vote> GetVotes()
+		{
+			return _dbContext.Votes.ToList();
+		}
 	}
 
 	public interface IVotes
 	{
 		public void Add(Vote vote);
+		public List<Vote> GetVotes();
 	}
 }

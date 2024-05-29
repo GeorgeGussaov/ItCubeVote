@@ -21,6 +21,7 @@ namespace ItCubeVote.Controllers
 		public IActionResult Index()
 		{
 			var projects = projectsDb.GetProjects();
+			ViewBag.CountVotes = votesDb.GetVotes().Count();
 			return View(Mapping.ToProjectsViewsModel(projects));
 		}
 		public IActionResult ToConfirm(Guid MostDificult, Guid MostBeautiful, Guid Coolest)
