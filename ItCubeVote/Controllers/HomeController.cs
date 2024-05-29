@@ -1,4 +1,5 @@
-﻿using ItCubeVote.Models;
+﻿using ItCubeVote.Helpers;
+using ItCubeVote.Models;
 using ItCubeVoteDb;
 using ItCubeVoteDb.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -13,16 +14,19 @@ namespace ItCubeVote.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly IProjects projects;
-		public HomeController(IProjects projects) 
+		private readonly IProjects projectsDb;
+		private readonly IUsers usersDb;
+		public HomeController(IProjects projects, IUsers users) 
 		{
-			this.projects = projects;
+			this.projectsDb = projects;
+			usersDb = users;
 		}
 
 		public IActionResult Index()
 		{
 			return View();
 		}
+
 
 		public IActionResult Privacy()
 		{
@@ -33,6 +37,17 @@ namespace ItCubeVote.Controllers
 		public IActionResult Error()
 		{
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+		}
+
+		[HttpPost]
+		public IActionResult Login(UserViewModel user)
+		{
+			if (ModelState.IsValid)
+			{
+				usersDb.Add(Mapping.ToUser(user));
+				return RedirectToAction("Index", "Vote");
+			}
+			return View("Index");
 		}
 	}
 }

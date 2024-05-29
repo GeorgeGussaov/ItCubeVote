@@ -26,10 +26,6 @@ namespace ItCubeVoteDb
 				new Project() { Id = Guid.NewGuid(), Name = "Fifth", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор" }
 			});
 
-            modelBuilder.Entity<User>().HasData(new List<User>() 
-            {
-                new User() {Id = Guid.NewGuid(), Login="Admin", Password="Admin"}
-            });
 
 		}
     }

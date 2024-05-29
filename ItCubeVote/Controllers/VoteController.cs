@@ -3,6 +3,7 @@ using ItCubeVoteDb;
 using ItCubeVoteDb.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 
 namespace ItCubeVote.Controllers
 {
@@ -10,10 +11,12 @@ namespace ItCubeVote.Controllers
 	{
 		private readonly IProjects projectsDb;
 		private readonly IVotes votesDb;
-		public VoteController(IProjects projects, IVotes votes)
+		private readonly IUsers usersDb;
+		public VoteController(IProjects projects, IVotes votes, IUsers usersDb)
 		{
 			this.projectsDb = projects;
 			this.votesDb = votes;
+			this.usersDb = usersDb;
 		}
 		public IActionResult Index()
 		{
@@ -26,7 +29,8 @@ namespace ItCubeVote.Controllers
 			{
 				MostDificult = projectsDb.TryGetProjectById(MostDificult),
 				MostBeautiful = projectsDb.TryGetProjectById(MostBeautiful),
-				Coolest = projectsDb.TryGetProjectById(Coolest)
+				Coolest = projectsDb.TryGetProjectById(Coolest),
+				User = usersDb.GetUsers().Last() //Очень грубый костыль. Берет последнего пользователя из бд, подразумевая что он текущий. Когда подключу куки буду брать оттуда.
 			};
 			votesDb.Add(newVote);
 			return RedirectToAction("Index");

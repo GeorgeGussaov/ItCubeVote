@@ -1,4 +1,5 @@
-﻿using ItCubeVote.Helpers;
+﻿using ItCubeVote.Areas.Admin.Models;
+using ItCubeVote.Helpers;
 using ItCubeVote.Models;
 using ItCubeVoteDb;
 using ItCubeVoteDb.Models;
@@ -27,11 +28,11 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult Index(UserViewModel user)
+		public IActionResult Index(AdminCheck admin)
 		{
 			if (ModelState.IsValid)
 			{
-				if (user.Login != "Admin" && user.Password != "Admin")
+				if (admin.Login != "Admin" && admin.Password != "Admin")
 				{
 					ModelState.AddModelError("", "Введен неправильный логин или пароль");
 					return View("Login");

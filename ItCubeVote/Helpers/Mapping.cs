@@ -30,5 +30,20 @@ namespace ItCubeVote.Helpers
 			return new ProjectViewModel() { Id = project.Id, Name = project.Name, Description = project.Description,
 				FirsAuthor = project.FirsAuthor, SecondAuthor = project.SecondAuthor };
 		}
+
+
+
+
+
+
+		public static User ToUser(UserViewModel user)
+		{
+			return new User() 
+			{
+				Name = user.Name,
+				School = user.School,
+				Class = user.Class
+			};
+		}
 	}
 }

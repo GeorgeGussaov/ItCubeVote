@@ -1,25 +1,22 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-@model UserViewModel
-<form method="post" asp-area="" asp-controller="Home" asp-action="Login">
+﻿@model UserViewModel
+<form method="post" asp-area="Admin" asp-controller="Main" asp-action="Index">
     <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
     <div class="text-center">
         <div>
-            <label asp-for="Name">Введите Фамилию и Имя</label>
+            <label asp-for="Name">Логин</label>
             <input asp-for="Name">
             <span asp-validation-for="Name"></span>
         </div>
   
         <br>
         <div>
-            <label asp-for="School">Введите школу(если вы школьник)</label>
+            <label asp-for="School">Пароль</label>
             <input asp-for="School" type="password">
             <span asp-validation-for="School"></span>
         </div>
         <br>
         <select class="form-select-sm" name="Class" asp-for="Class">
-			<option value="@null" selected>Выбрать класс</option>
+			<option selected>изменить статус</option>
 			<option value="1">1</option>
 			<option value="2">2</option>
 			<option value="3">3</option>
@@ -35,8 +32,8 @@
             <option value="Student">Студент</option>
             <option value="Other">Другое</option>
 		</select>
-        <br>
 
-        <button class="btn btn-primary m-2" type="submit">Голосовать</button>
+
+        <button class="btn btn-primary m-2" type="submit">Войти</button>
     </div>
 </form>

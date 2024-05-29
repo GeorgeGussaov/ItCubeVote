@@ -29,7 +29,10 @@ namespace ItCubeVote
 			services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
 			services.AddTransient<IProjects, ProjectsDbRepository>();
 			services.AddTransient<IVotes, VotesDbRepository>();
+			services.AddTransient<IUsers, UsersDbRepository>();
 			services.AddControllersWithViews();
+
+
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
