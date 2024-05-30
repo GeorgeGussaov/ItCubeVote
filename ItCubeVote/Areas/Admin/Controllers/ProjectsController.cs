@@ -10,13 +10,16 @@ namespace ItCubeVote.Areas.Admin.Controllers
 	public class ProjectsController : Controller
 	{
 		private readonly IProjects projectsDb;
-		public ProjectsController(IProjects projects)
+		private readonly IDates datesDb;
+		public ProjectsController(IProjects projects, IDates dates)
 		{
 			projectsDb = projects;
+			datesDb = dates;
 		}
-		public IActionResult Index()
+		public IActionResult Index(Guid id)
 		{
-			var projects = projectsDb.GetProjects();
+			
+			var projects = datesDb.TryGetProjectsById(id);
 			return View(Mapping.ToProjectsViewsModel(projects));
 		}
 		public IActionResult Project(Guid id)

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using ItCubeVoteDb.Models;
+using System.Linq;
 
 namespace ItCubeVoteDb
 {
@@ -11,6 +12,7 @@ namespace ItCubeVoteDb
         public DbSet<Project> Projects { get; set; }
         public DbSet<Vote> Votes { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Date> Dates { get; set; }
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
             Database.EnsureCreated();
@@ -26,7 +28,6 @@ namespace ItCubeVoteDb
 				new Project() { Id = Guid.NewGuid(), Name = "Fifth", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор" }
 			});
 
-
-		}
+        }
     }
 }

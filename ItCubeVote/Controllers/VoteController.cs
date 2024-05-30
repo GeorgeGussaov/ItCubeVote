@@ -12,11 +12,13 @@ namespace ItCubeVote.Controllers
 		private readonly IProjects projectsDb;
 		private readonly IVotes votesDb;
 		private readonly IUsers usersDb;
-		public VoteController(IProjects projects, IVotes votes, IUsers usersDb)
+		private readonly IDates datesDb;
+		public VoteController(IProjects projects, IVotes votes, IUsers users, IDates dates)
 		{
-			this.projectsDb = projects;
-			this.votesDb = votes;
-			this.usersDb = usersDb;
+			projectsDb = projects;
+			votesDb = votes;
+			usersDb = users;
+			datesDb = dates;
 		}
 		public IActionResult Index()
 		{
@@ -31,9 +33,10 @@ namespace ItCubeVote.Controllers
 				MostDificult = projectsDb.TryGetProjectById(MostDificult),
 				MostBeautiful = projectsDb.TryGetProjectById(MostBeautiful),
 				Coolest = projectsDb.TryGetProjectById(Coolest),
-				User = usersDb.GetUsers().Last() //Очень грубый костыль. Берет последнего пользователя из бд, подразумевая что он текущий. Когда подключу куки буду брать оттуда.
+				User = usersDb.GetUsers().Last(), //Очень грубый костыль. Берет последнего пользователя из бд, подразумевая что он текущий. Когда подключу куки буду брать оттуда.
 			};
-			votesDb.Add(newVote);
+			datesDb.AddVote(newVote);
+			//votesDb.Add(newVote);
 			return RedirectToAction("Index");
 		}
 	}

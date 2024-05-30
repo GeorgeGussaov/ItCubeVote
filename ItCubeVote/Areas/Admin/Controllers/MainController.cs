@@ -5,6 +5,9 @@ using ItCubeVoteDb;
 using ItCubeVoteDb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Net.NetworkInformation;
 
 namespace ItCubeVote.Areas.Admin.Controllers
 {
@@ -12,23 +15,38 @@ namespace ItCubeVote.Areas.Admin.Controllers
 	public class MainController : Controller
 	{
 		private readonly IProjects projectsDb;
-		public MainController(IProjects projects)
+		private readonly IDates datesDb;
+		public MainController(IProjects projects, IDates dates)
 		{
 			projectsDb= projects;
+			datesDb= dates;
 		}
 		public IActionResult Login()
 		{
 			return View();
 		}
 
+		public IActionResult Index()
+		{
+			var dates = datesDb.GetDates();
+			return View(Mapping.ToDatesViewModel(dates));
+		}
 
 		public IActionResult NewProject()
 		{
 			return View();
 		}
 
+
+		public IActionResult NewDate()
+		{
+			return View();
+		}
+
+
+
 		[HttpPost]
-		public IActionResult Index(AdminCheck admin)
+		public IActionResult Enter(AdminCheck admin)
 		{
 			if (ModelState.IsValid)
 			{
@@ -37,20 +55,29 @@ namespace ItCubeVote.Areas.Admin.Controllers
 					ModelState.AddModelError("", "Введен неправильный логин или пароль");
 					return View("Login");
 				}
-				return View();
+				return RedirectToAction("Index");
 			}
 			return View("Login");
 		}
 
 		public IActionResult AddNewProject(ProjectViewModel project)
 		{
-
-			if (ModelState.IsValid)
-			{
-				projectsDb.Add(Mapping.ToProject(project));
-				return View("Index");
+            if (ModelState.IsValid)
+            {
+				datesDb.AddProject(Mapping.ToProject(project));
+				//projectsDb.Add(Mapping.ToProject(project));
+				return RedirectToAction("Index");
 			}
 			return View("NewProject");
 		}
-	}
+        public IActionResult AddDate(DateViewModel date)
+        {
+			if (ModelState.IsValid)
+			{
+				datesDb.Add(Mapping.ToDate(date));
+				return RedirectToAction("Index");
+			}
+            return View("NewDate");
+        }
+    }
 }
