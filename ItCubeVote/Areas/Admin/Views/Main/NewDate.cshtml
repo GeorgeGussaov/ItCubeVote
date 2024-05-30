@@ -1,0 +1,14 @@
+﻿@model DateViewModel
+<div class="text-center">
+	<form method="post" asp-area="Admin" asp-controller="Main" asp-action="AddDate">
+		<div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
+            <div>
+                <label asp-for="DateTime">Дата</label>
+                <input type="date" asp-for="DateTime">
+                <span asp-validation-for="DateTime"></span>
+            </div>
+
+        <button class="btn btn-primary m-2" type="submit">Создать</button>
+	</form>
+</div>

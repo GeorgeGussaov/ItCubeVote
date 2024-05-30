@@ -30,6 +30,7 @@ namespace ItCubeVote
 			services.AddTransient<IProjects, ProjectsDbRepository>();
 			services.AddTransient<IVotes, VotesDbRepository>();
 			services.AddTransient<IUsers, UsersDbRepository>();
+			services.AddTransient<IDates, DatesDbRepository>();
 			services.AddControllersWithViews();
 
 
