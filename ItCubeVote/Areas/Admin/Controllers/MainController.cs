@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.NetworkInformation;
 
 namespace ItCubeVote.Areas.Admin.Controllers
@@ -28,7 +29,7 @@ namespace ItCubeVote.Areas.Admin.Controllers
 
 		public IActionResult Index()
 		{
-			var dates = datesDb.GetDates();
+			var dates = datesDb.GetDates().OrderBy(x => x.DateTime).Reverse().ToList();
 			return View(Mapping.ToDatesViewModel(dates));
 		}
 
@@ -42,7 +43,10 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		{
 			return View();
 		}
-
+		public IActionResult Results()
+		{
+			return View();
+		}
 
 
 		[HttpPost]

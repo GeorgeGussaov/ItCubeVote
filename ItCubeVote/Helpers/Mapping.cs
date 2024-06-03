@@ -126,8 +126,8 @@ namespace ItCubeVote.Helpers
 			{
 				Id=date.Id,
 				DateTime = date.DateTime,
-				Votes = /*ToVotes(date.Votes)*/ new List<Vote>(),
-				Projects = /*ToProjects(date.Projects)*/ new List<Project>()
+				//Votes = ToVotes(date.Votes),
+				//Projects = ToProjects(date.Projects)
 			};
 		}
 		public static List<DateViewModel> ToDatesViewModel(List<Date> dates)
@@ -139,8 +139,8 @@ namespace ItCubeVote.Helpers
 				{
 					Id = date.Id,
 					DateTime = date.DateTime,
-					Votes = ToVotesViewModel(date.Votes),
-					Projects = ToProjectsViewModel(date.Projects)
+					//Votes = ToVotesViewModel(date.Votes),
+					//Projects = ToProjectsViewModel(date.Projects)
                 });
 			}
 			return result;

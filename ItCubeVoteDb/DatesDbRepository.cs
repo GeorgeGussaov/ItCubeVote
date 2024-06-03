@@ -1,4 +1,5 @@
 ﻿using ItCubeVoteDb.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,12 @@ namespace ItCubeVoteDb
         }
         public void AddVote(Vote vote)
         {
-            _dbContext.Dates.OrderBy(x => x.DateTime).FirstOrDefault().Votes.Add(vote);   //голос добавляется в последнюю дату, добавленную админом.
+            _dbContext.Dates.OrderBy(x => x.DateTime).Include(x => x.Votes).Include(x => x.Projects).LastOrDefault().Votes.Add(vote);   //голос добавляется в последнюю дату, добавленную админом.
             _dbContext.SaveChanges();
         }
         public void AddProject(Project project)
         {
-            _dbContext.Dates.OrderBy(x => x.DateTime).FirstOrDefault().Projects.Add(project);   //то же самое с проектами
+            _dbContext.Dates.OrderBy(x => x.DateTime).Include(x => x.Projects).Include(x => x.Votes).LastOrDefault().Projects.Add(project);   //то же самое с проектами
             _dbContext.SaveChanges();
         }
         public List<Date> GetDates()
@@ -34,16 +35,16 @@ namespace ItCubeVoteDb
         }
         public Date GetCurrentDate()
         {
-            return _dbContext.Dates.OrderBy(x => x.DateTime).Reverse().LastOrDefault();
+            return _dbContext.Dates.Include(x => x.Projects).Include(x => x.Votes).OrderBy(x => x.DateTime).LastOrDefault();
         }
         public Date TryGetDateById(Guid id)
         {
-            return _dbContext.Dates.FirstOrDefault(x => x.Id == id);
+            return _dbContext.Dates.Include(x => x.Projects).Include(x => x.Votes).FirstOrDefault(x => x.Id == id);
         }
 
         public List<Project> TryGetProjectsById(Guid id)
         {
-            return _dbContext.Dates.FirstOrDefault(d => d.Id == id).Projects;
+            return _dbContext.Dates.Include(x => x.Projects).Include(x => x.Votes).FirstOrDefault(d => d.Id == id).Projects;
         }
     }
 
