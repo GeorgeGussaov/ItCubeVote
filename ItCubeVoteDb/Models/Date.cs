@@ -11,10 +11,10 @@ namespace ItCubeVoteDb.Models
 		public DateTime DateTime { get; set; }
 		public List<Vote> Votes { get; set; }
 		public List<Project> Projects { get; set; }
-		//public Date()
-		//{
-		//	Projects = new List<Project>();
-		//	Votes = new List<Vote>();
-		//}
+		public Date()
+		{
+			Projects = new List<Project>();
+			Votes = new List<Vote>();
+		}
 	}
 }

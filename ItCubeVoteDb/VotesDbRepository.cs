@@ -15,7 +15,7 @@ namespace ItCubeVoteDb
 		}
 		public void Add(Vote vote)
 		{
-			_dbContext.Add(vote);
+			_dbContext.Votes.Add(vote);
 			_dbContext.SaveChanges();
 		}
 		public List<Vote> GetVotes()

@@ -19,14 +19,27 @@ namespace ItCubeVoteDb
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Project>().HasData(new List<Project>()
-            {
-                new Project(){Id = Guid.NewGuid(), Name = "First", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор"},
-                new Project(){Id = Guid.NewGuid(), Name = "Second", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор"},
-				new Project() { Id = Guid.NewGuid(), Name = "Third", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор" }, 
-                new Project() { Id = Guid.NewGuid(), Name = "Fourth", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор" },
-				new Project() { Id = Guid.NewGuid(), Name = "Fifth", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор" }
-			});
+            //modelBuilder.Entity<Project>().HasData(new List<Project>()
+            //{
+            //    new Project(){Id = Guid.NewGuid(), Name = "First", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор"},
+            //    new Project(){Id = Guid.NewGuid(), Name = "Second", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор"},
+            //    new Project() { Id = Guid.NewGuid(), Name = "Third", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор" },
+            //    new Project() { Id = Guid.NewGuid(), Name = "Fourth", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор" },
+            //    new Project() { Id = Guid.NewGuid(), Name = "Fifth", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор" }
+            //});
+
+            
+            //modelBuilder.Entity<Date>().HasData(new List<Date>() 
+            //{
+            //    new Date(){ Id = Guid.NewGuid(), DateTime = DateTime.Now, Projects = new List<Project>() {
+            //        new Project(){Id = Guid.NewGuid(), Name = "First", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор"},
+            //        new Project(){Id = Guid.NewGuid(), Name = "Second", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор"},
+            //        new Project() { Id = Guid.NewGuid(), Name = "Third", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор" },
+            //        new Project() { Id = Guid.NewGuid(), Name = "Fourth", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор" },
+            //        new Project() { Id = Guid.NewGuid(), Name = "Fifth", Description="Описание проекта", FirsAuthor="Первый автор", SecondAuthor="Второй автор" }
+            //        } 
+            //    }
+            //});
 
         }
     }
