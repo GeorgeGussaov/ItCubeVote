@@ -79,7 +79,8 @@ namespace ItCubeVote.Helpers
 					User = vote.User,
 					MostBeautiful = vote.MostBeautiful,
 					MostDificult = vote.MostDificult,
-					Coolest = vote.Coolest
+					Coolest = vote.Coolest,
+					Time = vote.Time
 				});
 			}
 			return result;
@@ -95,7 +96,8 @@ namespace ItCubeVote.Helpers
                     User = vote.User,
                     MostBeautiful = vote.MostBeautiful,
                     MostDificult = vote.MostDificult,
-                    Coolest = vote.Coolest
+                    Coolest = vote.Coolest,
+					Time = vote.Time
                 });
             }
             return result;
@@ -114,7 +116,16 @@ namespace ItCubeVote.Helpers
 				Class = user.Class
 			};
 		}
-
+		public static UserViewModel ToUserViewModel(User user)
+		{
+			return new UserViewModel()
+			{
+				Id = user.Id,
+				Name = user.Name,
+				School = user.School,
+				Class = user.Class
+			};
+		}
 
 
 		

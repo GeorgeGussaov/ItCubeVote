@@ -17,10 +17,12 @@ namespace ItCubeVote.Areas.Admin.Controllers
 	{
 		private readonly IProjects projectsDb;
 		private readonly IDates datesDb;
-		public MainController(IProjects projects, IDates dates)
+		private readonly IUsers usersDb;
+		public MainController(IProjects projects, IDates dates, IUsers users)
 		{
 			projectsDb= projects;
 			datesDb= dates;
+			usersDb= users;
 		}
 		public IActionResult Login()
 		{
@@ -43,9 +45,22 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		{
 			return View();
 		}
-		public IActionResult Results()
+
+
+
+		public IActionResult Votes(Guid id)
 		{
-			return View();
+			var votes = datesDb.TryGetDateById(id).Votes;
+			votes.Reverse(); //чтобы новые голоса были выше старых
+			return View(Mapping.ToVotesViewModel(votes));
+		}
+
+
+
+		public IActionResult UserInfo(Guid id)
+		{
+			var user = usersDb.TryGetUserById(id);
+			return View(Mapping.ToUserViewModel(user));
 		}
 
 

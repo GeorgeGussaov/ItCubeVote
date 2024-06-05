@@ -1,0 +1,21 @@
+﻿@model List<VoteViewModel>
+
+<table class="table">
+    <tr>
+        <th>Пользователь</th>
+        <th>Время</th>
+        <th>Самый красивый</th>
+        <th>Самый сложный</th>
+        <th>Самый прикольный</th>
+    </tr>
+    @foreach(var vote in Model)
+    {
+        <tr>
+            <td><a asp-controller="Main" asp-action="UserInfo" asp-route-id="@vote.User.Id">@vote.User.Name</a></td>
+            <td>@vote.Time</td> 
+            <td>@vote.MostBeautiful.Name</td>
+            <td>@vote.MostDificult.Name</td>
+            <td>@vote.Coolest.Name</td>
+        </tr>
+    }
+</table>
