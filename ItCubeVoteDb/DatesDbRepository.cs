@@ -39,8 +39,13 @@ namespace ItCubeVoteDb
         }
         public Date TryGetDateById(Guid id)
         {
-            return _dbContext.Dates.Include(x => x.Projects).Include(x => x.Votes).FirstOrDefault(x => x.Id == id);
+            return _dbContext.Dates.Include(x => x.Projects).Include(x => x.Votes).Include(x => x.Votes).ThenInclude(x => x.User).FirstOrDefault(x => x.Id == id);
         }
+
+        //public List<Vote> TruGetVotesById(Guid id)
+        //{
+        //    ret
+        //}
 
         public List<Project> TryGetProjectsById(Guid id)
         {

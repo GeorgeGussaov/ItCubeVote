@@ -24,11 +24,17 @@ namespace ItCubeVoteDb
 		{
 			return _databaseContext.Users.ToList();
 		}
+
+		public User TryGetUserById(Guid id)
+		{
+			return _databaseContext.Users.FirstOrDefault(x => x.Id == id);
+		}
 	}
 
 	public interface IUsers
 	{
 		public void Add(User user);
 		public List<User> GetUsers();
+		public User TryGetUserById(Guid id);
 	}
 }

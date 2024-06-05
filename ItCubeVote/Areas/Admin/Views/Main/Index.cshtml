@@ -20,7 +20,7 @@
                 <tr>
                     <td><p>@date.DateTime:</p></td> 
                     <td><a class="btn btn-primary mb-3" asp-area="Admin" asp-controller="Projects" asp-action="Index" asp-route-id="@date.Id">Проекты</a></td>
-                    <td><a class="btn btn-primary" asp-area="Admin" asp-controller="Main" asp-action="Results">Результаты</a></td>
+                    <td><a class="btn btn-primary" asp-area="Admin" asp-controller="Main" asp-action="Votes" asp-route-id="@date.Id">Результаты</a></td>
                 </tr>
             }
         </table>
