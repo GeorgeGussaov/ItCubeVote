@@ -56,6 +56,32 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		}
 
 
+		public IActionResult Results(Guid id)
+		{
+			var votes = Mapping.ToVotesViewModel(datesDb.TryGetDateById(id).Votes);
+			var projects = Mapping.ToProjectsViewModel(datesDb.TryGetDateById(id).Projects);
+			var projectResults = new List<ProjectResult>();
+			foreach(var project in projects)
+			{
+				projectResults.Add(new ProjectResult() { Project = project });
+			}
+
+			foreach(var result in projectResults)
+			{
+				foreach(var vote in votes)
+				{
+					if (result.Project.Id == vote.MostBeautiful.Id) result.CntMostBeautifulVotes++;
+					else if(result.Project.Id == vote.MostDificult.Id) result.CntMostDificultVotes++;
+					else if(result.Project.Id == vote.Coolest.Id) result.CntCoolestVotes++;
+				}
+				result.CountAll();
+			}
+
+			return View(projectResults.OrderBy(x => x.CntAll).Reverse().ToList());
+		}
+
+
+
 
 		public IActionResult UserInfo(Guid id)
 		{
@@ -83,7 +109,7 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		{
             if (ModelState.IsValid)
             {
-				datesDb.AddProject(Mapping.ToProject(project));
+				if(datesDb != null) datesDb.AddProject(Mapping.ToProject(project));
 				//projectsDb.Add(Mapping.ToProject(project));
 				return RedirectToAction("Index");
 			}

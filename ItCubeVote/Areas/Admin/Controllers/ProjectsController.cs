@@ -19,7 +19,6 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		}
 		public IActionResult Index(Guid id)
 		{
-			
 			var projects = datesDb.TryGetProjectsById(id);
 			return View(Mapping.ToProjectsViewsModel(projects));
 		}
@@ -31,7 +30,6 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		public IActionResult Edit(Guid Id)
 		{
 			var project = projectsDb.TryGetProjectById(Id);
-
 			return View(Mapping.ToProjectViewModel(project));
 		}
 
@@ -40,8 +38,9 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				projectsDb.EditProject(Mapping.ToProject(project));
-				return RedirectToAction("Index");
+				var curDate = datesDb.GetCurrentDate().Id;
+				datesDb.EditProject(curDate,Mapping.ToProject(project));
+				return RedirectToAction("Index", "Main");
 			}
 			return View("Edit");
 		}

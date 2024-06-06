@@ -31,20 +31,20 @@ namespace ItCubeVoteDb
 
 		}
 
-		public void EditProject(Project project)
-		{
-			foreach (var pr in _dbContext.Projects)
-			{
-				if(pr.Id == project.Id)
-				{
-					pr.Name = project.Name;
-					pr.Description = project.Description;
-					pr.FirsAuthor = project.FirsAuthor;
-					pr.SecondAuthor = project.SecondAuthor;
-				}
-			}
-			_dbContext.SaveChanges();
-		}
+		//public void EditProject(Project project)
+		//{
+		//	foreach (var pr in _dbContext.Projects)
+		//	{
+		//		if(pr.Id == project.Id)
+		//		{
+		//			pr.Name = project.Name;
+		//			pr.Description = project.Description;
+		//			pr.FirsAuthor = project.FirsAuthor;
+		//			pr.SecondAuthor = project.SecondAuthor;
+		//		}
+		//	}
+		//	_dbContext.SaveChanges();
+		//}
 	}
 
 	public interface IProjects
@@ -52,6 +52,6 @@ namespace ItCubeVoteDb
 		public void Add(Project project);
 		public List<Project> GetProjects();
 		public Project TryGetProjectById(Guid id);
-		public void EditProject(Project project);
+		//public void EditProject(Project project);
 	}
 }

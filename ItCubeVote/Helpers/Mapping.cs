@@ -8,6 +8,7 @@ namespace ItCubeVote.Helpers
 	{
 		public static List<ProjectViewModel> ToProjectsViewsModel(List<Project> projects)
 		{
+			if (projects == null || projects.Count == 0) return null;
 			var projectsView = new List<ProjectViewModel>();
 			foreach (var project in projects)
 			{
@@ -25,8 +26,14 @@ namespace ItCubeVote.Helpers
 
 		public static Project ToProject(ProjectViewModel projectView)
 		{
-			return new Project() { Id = projectView.Id, Name = projectView.Name, Description = projectView.Description,
-				FirsAuthor=projectView.FirsAuthor, SecondAuthor= projectView.SecondAuthor };
+			return new Project() 
+			{ 
+				Id = projectView.Id,
+				Name = projectView.Name,
+				Description = projectView.Description,
+				FirsAuthor=projectView.FirsAuthor, 
+				SecondAuthor= projectView.SecondAuthor 
+			};
 		}
 		public static ProjectViewModel ToProjectViewModel(Project project)
 		{
@@ -77,9 +84,9 @@ namespace ItCubeVote.Helpers
 				{
 					Id=vote.Id,
 					User = vote.User,
-					MostBeautiful = vote.MostBeautiful,
-					MostDificult = vote.MostDificult,
-					Coolest = vote.Coolest,
+					MostBeautiful = ToProjectViewModel(vote.MostBeautiful),
+					MostDificult = ToProjectViewModel(vote.MostDificult),
+					Coolest = ToProjectViewModel(vote.Coolest),
 					Time = vote.Time
 				});
 			}
@@ -94,9 +101,9 @@ namespace ItCubeVote.Helpers
                 {
                     Id = vote.Id,
                     User = vote.User,
-                    MostBeautiful = vote.MostBeautiful,
-                    MostDificult = vote.MostDificult,
-                    Coolest = vote.Coolest,
+                    MostBeautiful = ToProject(vote.MostBeautiful),
+                    MostDificult = ToProject(vote.MostDificult),
+                    Coolest = ToProject(vote.Coolest),
 					Time = vote.Time
                 });
             }
