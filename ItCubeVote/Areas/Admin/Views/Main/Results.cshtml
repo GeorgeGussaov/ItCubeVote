@@ -1,0 +1,21 @@
+﻿@model List<ProjectResult>
+
+<table class="table">
+    <tr>
+        <th>Название проекта</th>
+        <th>Самый красивый</th>
+        <th>Самый сложный</th>
+        <th>Самый прикольный</th>
+        <th>Общее кол-во</th>
+    </tr>
+    @foreach(var res in Model)
+    {
+        <tr>
+            <td><a asp-area="" asp-controller="Project" asp-action="Index" asp-route-id="@res.Project.Id" class="btn btn-primary">@res.Project.Name</a></td> 
+            <td>@res.CntMostBeautifulVotes</td>
+            <td>@res.CntMostDificultVotes</td>
+            <td>@res.CntCoolestVotes</td>
+            <td>@res.CntAll</td>
+        </tr>
+    }
+</table>

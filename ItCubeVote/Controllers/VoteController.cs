@@ -22,9 +22,9 @@ namespace ItCubeVote.Controllers
 		}
 		public IActionResult Index()
 		{
-			var projects = datesDb.GetCurrentDate().Projects;
-			ViewBag.CountVotes = datesDb.GetCurrentDate().Votes.Count;
-			return View(Mapping.ToProjectsViewsModel(projects));
+            var projects = datesDb?.GetCurrentDate()?.Projects ?? null;
+            ViewBag.CountVotes = datesDb?.GetCurrentDate()?.Votes.Count ?? 0;
+            return View(Mapping.ToProjectsViewsModel(projects));
 		}
 		public IActionResult ToConfirm(Guid MostDificult, Guid MostBeautiful, Guid Coolest)
 		{

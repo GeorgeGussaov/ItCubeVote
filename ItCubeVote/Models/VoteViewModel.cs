@@ -8,8 +8,8 @@ namespace ItCubeVote.Models
 		public Guid Id { get; set; }
 		public User User { get; set; }
 		public DateTime Time { get; set; }
-		public Project MostDificult { get; set; }
-		public Project MostBeautiful { get; set; }
-		public Project Coolest { get; set; }
+		public ProjectViewModel MostDificult { get; set; }
+		public ProjectViewModel MostBeautiful { get; set; }
+		public ProjectViewModel Coolest { get; set; }
 	}
 }
