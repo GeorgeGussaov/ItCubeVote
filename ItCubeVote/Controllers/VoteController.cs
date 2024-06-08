@@ -26,6 +26,10 @@ namespace ItCubeVote.Controllers
             ViewBag.CountVotes = datesDb?.GetCurrentDate()?.Votes.Count ?? 0;
             return View(Mapping.ToProjectsViewsModel(projects));
 		}
+		public IActionResult Thanks()
+		{
+			return View();
+		}
 		public IActionResult ToConfirm(Guid MostDificult, Guid MostBeautiful, Guid Coolest)
 		{
 			Vote newVote = new Vote()
@@ -37,7 +41,7 @@ namespace ItCubeVote.Controllers
 			};
 			datesDb.AddVote(newVote);
 			//votesDb.Add(newVote);
-			return RedirectToAction("Index");
+			return RedirectToAction("Tkanks");
 		}
 	}
 }

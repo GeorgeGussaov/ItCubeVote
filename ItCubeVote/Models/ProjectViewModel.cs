@@ -13,5 +13,6 @@ namespace ItCubeVote.Models
 		public string Description { get; set; }
 		public string FirsAuthor { get; set; }
 		public string SecondAuthor { get; set; }
+		public bool IsRemovable { get; set; } = true;
 	}
 }

@@ -9,6 +9,10 @@
 			<tr>
 				<td><a asp-area="" asp-controller="Project" asp-action="Index" asp-route-id="@project.Id" class="btn btn-primary">@project.Name</a></td>
 				<td><a asp-area="Admin" asp-controller="Projects" asp-action="Edit" asp-route-id="@project.Id" class="btn btn-success">Редактировать</a></td>
+				@if (project.IsRemovable)
+				{
+					<td><a asp-area="Admin" asp-controller="Projects" asp-action="Delete" asp-route-id="@project.Id" class="btn btn-danger">Удалить</a></td>
+				}
 			</tr>
 		}
 	</table>

@@ -31,6 +31,12 @@ namespace ItCubeVoteDb
 
 		}
 
+		public void DeleteProject(Guid id)
+		{
+			var project = _dbContext.Projects.FirstOrDefault(x => x.Id == id);
+			_dbContext.Projects.Remove(project);
+			_dbContext.SaveChanges();
+		}
 		//public void EditProject(Project project)
 		//{
 		//	foreach (var pr in _dbContext.Projects)
@@ -53,5 +59,7 @@ namespace ItCubeVoteDb
 		public List<Project> GetProjects();
 		public Project TryGetProjectById(Guid id);
 		//public void EditProject(Project project);
-	}
+		public void DeleteProject(Guid id);
+
+    }
 }

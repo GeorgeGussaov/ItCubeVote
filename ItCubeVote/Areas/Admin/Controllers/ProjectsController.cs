@@ -19,8 +19,16 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		}
 		public IActionResult Index(Guid id)
 		{
-			var projects = datesDb.TryGetProjectsById(id);
-			return View(Mapping.ToProjectsViewsModel(projects));
+			var projects = Mapping.ToProjectsViewModel(datesDb.TryGetProjectsById(id));
+			var votes = Mapping.ToVotesViewModel(datesDb.TryGetDateById(id).Votes);
+			foreach(var vote in votes)
+			{
+				foreach(var project in projects)
+				{
+					if (vote.MostDificult.Id == project.Id || vote.MostBeautiful.Id == project.Id || vote.Coolest.Id == project.Id) project.IsRemovable = false;
+				}
+			}
+			return View(projects);
 		}
 		public IActionResult Project(Guid id)
 		{
@@ -31,6 +39,11 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		{
 			var project = projectsDb.TryGetProjectById(Id);
 			return View(Mapping.ToProjectViewModel(project));
+		}
+		public IActionResult Delete(Guid id)
+		{
+			projectsDb.DeleteProject(id);
+			return RedirectToAction("Index", "Main");
 		}
 
 		[HttpPost]
