@@ -119,6 +119,15 @@ namespace ItCubeVote.Areas.Admin.Controllers
         {
 			if (ModelState.IsValid)
 			{
+				var dates = Mapping.ToDatesViewModel(datesDb.GetDates());
+				foreach(var item in dates)
+				{
+					if(item.DateTime > date.DateTime)	//ну по тексту ошибки понятно зачем этот форич
+					{
+						ModelState.AddModelError("", "Указана неактуальная дата(у предыдущего события дата свежее)");
+						return View("NewDate");
+					}
+				}
 				datesDb.Add(Mapping.ToDate(date));
 				return RedirectToAction("Index");
 			}

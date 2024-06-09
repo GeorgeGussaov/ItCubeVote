@@ -2,12 +2,17 @@
 using ItCubeVote.Models;
 using ItCubeVoteDb;
 using ItCubeVoteDb.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Security.Policy;
 using System.Threading.Tasks;
 
 namespace ItCubeVote.Controllers
@@ -24,7 +29,9 @@ namespace ItCubeVote.Controllers
 
 		public IActionResult Index()
 		{
-			return View();
+			var Cookie = Request.Cookies["user"];
+			if(Cookie == null) return View();
+			return RedirectToAction("Index", "Vote");
 		}
 
 
@@ -44,7 +51,13 @@ namespace ItCubeVote.Controllers
 		{
 			if (ModelState.IsValid)
 			{
+				user.Id =  Guid.NewGuid();
 				usersDb.Add(Mapping.ToUser(user));
+
+				CookieOptions cookie = new CookieOptions();
+				cookie.Expires = DateTime.Now.AddDays(1);
+				Response.Cookies.Append("user", user.Id.ToString(), cookie);
+
 				return RedirectToAction("Index", "Vote");
 			}
 			return View("Index");
