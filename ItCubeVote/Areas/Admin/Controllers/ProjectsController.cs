@@ -19,6 +19,8 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		}
 		public IActionResult Index(Guid id)
 		{
+			var Cookie = Request.Cookies["admin"];
+			if (Cookie == null) return RedirectToAction("Warning", "Main");
 			var projects = Mapping.ToProjectsViewModel(datesDb.TryGetProjectsById(id));
 			var votes = Mapping.ToVotesViewModel(datesDb.TryGetDateById(id).Votes);
 			foreach(var vote in votes)
@@ -37,11 +39,16 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		}
 		public IActionResult Edit(Guid Id)
 		{
+			var Cookie = Request.Cookies["admin"];
+			if (Cookie == null) return RedirectToAction("Warning", "Main");
 			var project = projectsDb.TryGetProjectById(Id);
 			return View(Mapping.ToProjectViewModel(project));
 		}
 		public IActionResult Delete(Guid id)
 		{
+			var Cookie = Request.Cookies["admin"];
+			if (Cookie == null) return RedirectToAction("Warning", "Main");
+
 			projectsDb.DeleteProject(id);
 			return RedirectToAction("Index", "Main");
 		}
@@ -49,6 +56,9 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		[HttpPost]
 		public IActionResult EditProject(ProjectViewModel project)
 		{
+			var Cookie = Request.Cookies["admin"];
+			if (Cookie == null) return RedirectToAction("Warning", "Main");
+
 			if (ModelState.IsValid)
 			{
 				var curDate = datesDb.GetCurrentDate().Id;

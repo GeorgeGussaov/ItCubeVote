@@ -3,6 +3,7 @@ using ItCubeVote.Helpers;
 using ItCubeVote.Models;
 using ItCubeVoteDb;
 using ItCubeVoteDb.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -28,9 +29,16 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		{
 			return View();
 		}
+		public IActionResult Warning()
+		{
+			return View();
+		}
 
 		public IActionResult Index()
 		{
+			var Cookie = Request.Cookies["admin"];
+			if (Cookie == null) return RedirectToAction("Warning", "Main");
+
 			var dates = datesDb.GetDates().OrderBy(x => x.DateTime).Reverse().ToList();
 			return View(Mapping.ToDatesViewModel(dates));
 		}
@@ -43,6 +51,9 @@ namespace ItCubeVote.Areas.Admin.Controllers
 
 		public IActionResult NewDate()
 		{
+			var Cookie = Request.Cookies["admin"];
+			if (Cookie == null) return RedirectToAction("Warning", "Main");
+
 			return View();
 		}
 
@@ -50,6 +61,9 @@ namespace ItCubeVote.Areas.Admin.Controllers
 
 		public IActionResult Votes(Guid id)
 		{
+			var Cookie = Request.Cookies["admin"];
+			if (Cookie == null) return RedirectToAction("Warning", "Main");
+
 			var votes = datesDb.TryGetDateById(id).Votes;
 			votes.Reverse(); //чтобы новые голоса были выше старых
 			return View(Mapping.ToVotesViewModel(votes));
@@ -58,6 +72,9 @@ namespace ItCubeVote.Areas.Admin.Controllers
 
 		public IActionResult Results(Guid id)
 		{
+			var Cookie = Request.Cookies["admin"];
+			if (Cookie == null) return RedirectToAction("Warning", "Main");		//результаты пока что только для админа
+
 			var votes = Mapping.ToVotesViewModel(datesDb.TryGetDateById(id).Votes);
 			var projects = Mapping.ToProjectsViewModel(datesDb.TryGetDateById(id).Projects);
 			var projectResults = new List<ProjectResult>();
@@ -83,6 +100,9 @@ namespace ItCubeVote.Areas.Admin.Controllers
 
 		public IActionResult Delete(Guid id)
 		{
+			var Cookie = Request.Cookies["admin"];
+			if (Cookie == null) return RedirectToAction("Warning", "Main");
+
 			datesDb.DeleteDateById(id);
 			return RedirectToAction("Index");
 		}
@@ -106,6 +126,9 @@ namespace ItCubeVote.Areas.Admin.Controllers
 					ModelState.AddModelError("", "Введен неправильный логин или пароль");
 					return View("Login");
 				}
+				CookieOptions cookie = new CookieOptions();
+				cookie.Expires = DateTime.Now.AddHours(1);	//каждый час в админа надо перезаходить 
+				Response.Cookies.Append("admin", "admin", cookie);
 				return RedirectToAction("Index");
 			}
 			return View("Login");
@@ -123,6 +146,9 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		}
         public IActionResult AddDate(DateViewModel date)
         {
+			var Cookie = Request.Cookies["admin"];
+			if (Cookie == null) return RedirectToAction("Warning", "Main");
+
 			if (ModelState.IsValid)
 			{
 				var dates = Mapping.ToDatesViewModel(datesDb.GetDates());
