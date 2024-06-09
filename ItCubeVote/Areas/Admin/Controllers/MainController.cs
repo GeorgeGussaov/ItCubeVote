@@ -81,6 +81,12 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		}
 
 
+		public IActionResult Delete(Guid id)
+		{
+			datesDb.DeleteDateById(id);
+			return RedirectToAction("Index");
+		}
+
 
 
 		public IActionResult UserInfo(Guid id)

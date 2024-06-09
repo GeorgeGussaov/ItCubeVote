@@ -68,6 +68,12 @@ namespace ItCubeVoteDb
             }
             _dbContext.SaveChanges();
         }
+
+        public void DeleteDateById(Guid id)
+        {
+            _dbContext.Dates.Remove(TryGetDateById(id));
+            _dbContext.SaveChanges();
+        }
     }
 
     public interface IDates
@@ -80,5 +86,7 @@ namespace ItCubeVoteDb
         public Date TryGetDateById(Guid id);
         public List<Project> TryGetProjectsById(Guid id);
         public void EditProject(Guid id, Project project);
-    }
+        public void DeleteDateById(Guid id);
+
+	}
 }
