@@ -40,7 +40,7 @@ namespace ItCubeVoteDb
         {
             if(_dbContext.Dates.Count() != 0)
             {
-                return _dbContext.Dates.Include(x => x.Projects).Include(x => x.Votes).OrderBy(x => x.DateTime).LastOrDefault();
+                return _dbContext.Dates.Include(x => x.Projects).Include(x => x.Votes).ThenInclude(x => x.User).OrderBy(x => x.DateTime).LastOrDefault();
             }
             return null;
         }

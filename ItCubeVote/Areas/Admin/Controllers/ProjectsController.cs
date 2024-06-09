@@ -23,8 +23,8 @@ namespace ItCubeVote.Areas.Admin.Controllers
 			var votes = Mapping.ToVotesViewModel(datesDb.TryGetDateById(id).Votes);
 			foreach(var vote in votes)
 			{
-				foreach(var project in projects)
-				{
+				foreach(var project in projects)		//весь вложенный цикл только чтобы проверить на наличие проекта среди голосов и в случае отсутствия голоса за проект
+				{										//дать админу возможность удалить этот проект(сделано только чтобы если проект добавлен случайно можно было снести)
 					if (vote.MostDificult.Id == project.Id || vote.MostBeautiful.Id == project.Id || vote.Coolest.Id == project.Id) project.IsRemovable = false;
 				}
 			}
