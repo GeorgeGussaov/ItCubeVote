@@ -1,13 +1,31 @@
 ﻿@model List<ProjectViewModel>
+@{
+	int cnt = 1;
+}
 <div class="text-center">
 	<table class="table">
 		<tr>
+			<th>N</th>
+			<th>Скрин</th>
 			<th>Название</th>
+			<th>Автор 1</th>
+			<th>Автор 2</th>
 		</tr>
 		@foreach(var project in Model)
 		{
 			<tr>
+				<td>@(cnt++)</td>
+				<td><img src="@project.ImgPath" width="200"></td>
 				<td><a asp-area="" asp-controller="Project" asp-action="Index" asp-route-id="@project.Id" class="btn btn-primary">@project.Name</a></td>
+				<td>@project.FirsAuthor</td>
+				@if(project.SecondAuthor == null)
+				{
+					<td>-</td>
+				}
+				else
+				{
+					<td>@project.SecondAuthor</td>
+				}
 				<td><a asp-area="Admin" asp-controller="Projects" asp-action="Edit" asp-route-id="@project.Id" class="btn btn-success">Редактировать</a></td>
 				@if (project.IsRemovable)
 				{

@@ -1,5 +1,5 @@
 ﻿@model ProjectViewModel
-<form method="post" asp-area="Admin" asp-controller="Projects" asp-action="EditProject">
+<form method="post" enctype="multipart/form-data" asp-area="Admin" asp-controller="Projects" asp-action="EditProject">
     <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
     <div class="text-center">
         <div>
@@ -26,8 +26,20 @@
             <span asp-validation-for="SecondAuthor"></span>
         </div>
         <br>
+        <div>
+            <label asp-for="GitLink">Ссылка на git</label>
+            <input asp-for="GitLink">
+            <span asp-validation-for="GitLink"></span>
+        </div>
+        <br>
+        <div>
+            <label asp-for="Img">Скриншот проекта</label>
+            <input type="file" asp-for="Img">
+            <span asp-validation-for="Img"></span>
+        </div>
+        <br>
          <div class="invisible">
-            <label asp-for="Id">Новое название</label>
+            <label asp-for="Id"></label>
             <input asp-for="Id">
             <span asp-validation-for="Id"></span>
         </div>

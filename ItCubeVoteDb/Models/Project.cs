@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ItCubeVoteDb.Models
 {
@@ -10,6 +12,7 @@ namespace ItCubeVoteDb.Models
 		public string Description { get; set; }
 		public string FirsAuthor { get; set; }
 		public string SecondAuthor { get; set; }
-
+		public string GitLink { get; set; }
+		public string ImgPath { get; set; }
 	}
 }

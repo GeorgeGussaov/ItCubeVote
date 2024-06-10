@@ -1,8 +1,11 @@
 ﻿using ItCubeVote.Helpers;
 using ItCubeVote.Models;
 using ItCubeVoteDb;
+using ItCubeVoteDb.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.IO;
 using System.Linq;
 
 namespace ItCubeVote.Areas.Admin.Controllers
@@ -12,15 +15,18 @@ namespace ItCubeVote.Areas.Admin.Controllers
 	{
 		private readonly IProjects projectsDb;
 		private readonly IDates datesDb;
-		public ProjectsController(IProjects projects, IDates dates)
+		private readonly IWebHostEnvironment appEnvironment;
+		public ProjectsController(IProjects projects, IDates dates, IWebHostEnvironment app)
 		{
 			projectsDb = projects;
 			datesDb = dates;
+			appEnvironment = app;
 		}
 		public IActionResult Index(Guid id)
 		{
 			var Cookie = Request.Cookies["admin"];
 			if (Cookie == null) return RedirectToAction("Warning", "Main");
+
 			var projects = Mapping.ToProjectsViewModel(datesDb.TryGetProjectsById(id));
 			var votes = Mapping.ToVotesViewModel(datesDb.TryGetDateById(id).Votes);
 			foreach(var vote in votes)
@@ -41,6 +47,7 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		{
 			var Cookie = Request.Cookies["admin"];
 			if (Cookie == null) return RedirectToAction("Warning", "Main");
+
 			var project = projectsDb.TryGetProjectById(Id);
 			return View(Mapping.ToProjectViewModel(project));
 		}
@@ -54,6 +61,7 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		}
 
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public IActionResult EditProject(ProjectViewModel project)
 		{
 			var Cookie = Request.Cookies["admin"];
@@ -61,8 +69,33 @@ namespace ItCubeVote.Areas.Admin.Controllers
 
 			if (ModelState.IsValid)
 			{
+
+				var folderPath = Path.Combine(appEnvironment.WebRootPath + "/images/projects/");
+				if (!Directory.Exists(folderPath))
+				{
+					Directory.CreateDirectory(folderPath);
+				}
+
+				var fileName = Guid.NewGuid() + "." + project.Img.FileName.Split('.').Last();
+				//string path = Path.Combine(folderPath, fileName);
+				using (var fileStream = new FileStream(folderPath + fileName, FileMode.Create))
+				{
+					project.Img.CopyTo(fileStream);
+				}
+
+				var projectDb = new Project()
+				{
+					Id = project.Id,
+					Name = project.Name,
+					FirsAuthor = project.FirsAuthor,
+					SecondAuthor = project.SecondAuthor,
+					Description = project.Description,
+					GitLink = project.GitLink,
+					ImgPath = "/image/projects/" + fileName
+				};
+
 				var curDate = datesDb.GetCurrentDate().Id;
-				datesDb.EditProject(curDate,Mapping.ToProject(project));
+				datesDb.EditProject(curDate,projectDb);
 				return RedirectToAction("Index", "Main");
 			}
 			return View("Edit");

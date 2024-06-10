@@ -64,6 +64,8 @@ namespace ItCubeVoteDb
                     pr.Description = project.Description;
                     pr.FirsAuthor = project.FirsAuthor;
                     pr.SecondAuthor = project.SecondAuthor;
+                    pr.GitLink = project.GitLink;
+                    pr.ImgPath = project.ImgPath;
                 }
             }
             _dbContext.SaveChanges();

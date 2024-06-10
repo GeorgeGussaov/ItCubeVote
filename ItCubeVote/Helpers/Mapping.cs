@@ -37,8 +37,16 @@ namespace ItCubeVote.Helpers
 		}
 		public static ProjectViewModel ToProjectViewModel(Project project)
 		{
-			return new ProjectViewModel() { Id = project.Id, Name = project.Name, Description = project.Description,
-				FirsAuthor = project.FirsAuthor, SecondAuthor = project.SecondAuthor };
+			return new ProjectViewModel() 
+			{ 
+				Id = project.Id, 
+				Name = project.Name, 
+				Description = project.Description,
+				FirsAuthor = project.FirsAuthor,
+				SecondAuthor = project.SecondAuthor,
+				GitLink = project.GitLink,
+				ImgPath = project.ImgPath
+			};
 		}
 		public static List<Project> ToProjects(List<ProjectViewModel> projectsView)
 		{
@@ -51,7 +59,9 @@ namespace ItCubeVote.Helpers
 					Name = project.Name,
 					Description = project.Description,
 					FirsAuthor = project.FirsAuthor,
-					SecondAuthor = project.SecondAuthor
+					SecondAuthor = project.SecondAuthor,
+					GitLink = project.GitLink,
+					ImgPath = project.ImgPath
 				});
 			}
 			return result;
@@ -67,7 +77,9 @@ namespace ItCubeVote.Helpers
 					Name = project.Name,
 					Description = project.Description,
 					FirsAuthor = project.FirsAuthor,
-					SecondAuthor = project.SecondAuthor
+					SecondAuthor = project.SecondAuthor,
+					GitLink = project.GitLink,
+					ImgPath = project.ImgPath
 				});
 			}
 			return result;

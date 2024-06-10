@@ -3,11 +3,13 @@ using ItCubeVote.Helpers;
 using ItCubeVote.Models;
 using ItCubeVoteDb;
 using ItCubeVoteDb.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
 
@@ -19,14 +21,19 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		private readonly IProjects projectsDb;
 		private readonly IDates datesDb;
 		private readonly IUsers usersDb;
-		public MainController(IProjects projects, IDates dates, IUsers users)
+		private readonly IWebHostEnvironment appEnvironment;
+		public MainController(IProjects projects, IDates dates, IUsers users, IWebHostEnvironment app)
 		{
 			projectsDb= projects;
 			datesDb= dates;
 			usersDb= users;
+			appEnvironment= app;
 		}
 		public IActionResult Login()
 		{
+			var Cookie = Request.Cookies["admin"];
+			if (Cookie != null) return RedirectToAction("Index");
+
 			return View();
 		}
 		public IActionResult Warning()
@@ -133,12 +140,38 @@ namespace ItCubeVote.Areas.Admin.Controllers
 			}
 			return View("Login");
 		}
-
+		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public IActionResult AddNewProject(ProjectViewModel project)
 		{
             if (ModelState.IsValid)
-            {
-				if(datesDb != null) datesDb.AddProject(Mapping.ToProject(project));
+			{
+
+				var folderPath = Path.Combine(appEnvironment.WebRootPath + "/images/projects/");
+				if (!Directory.Exists(folderPath))
+				{
+					Directory.CreateDirectory(folderPath);
+				}
+
+				var fileName = Guid.NewGuid() + "." + project.Img.FileName.Split('.').Last();
+				//string path = Path.Combine(folderPath, fileName);
+				using (var fileStream = new FileStream(folderPath + fileName, FileMode.Create))
+				{
+					project.Img.CopyTo(fileStream);
+				}
+
+				var projectDb = new Project()
+				{
+					Name = project.Name,
+					FirsAuthor = project.FirsAuthor,
+					SecondAuthor = project.SecondAuthor,
+					Description = project.Description,
+					GitLink = project.GitLink,
+					ImgPath = "/images/projects/" + fileName
+				};
+
+
+				if (datesDb != null) datesDb.AddProject(projectDb);
 				//projectsDb.Add(Mapping.ToProject(project));
 				return RedirectToAction("Index");
 			}
