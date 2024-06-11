@@ -2,7 +2,7 @@
 <div class="text-center">
     @if(Model.Count != 0)
     {
-        <a class="btn btn-primary mb-3" asp-area="Admin" asp-controller="Main" asp-action="NewProject">Добавить новый проект</a>
+        <a class="btn btn-info mb-3" asp-area="Admin" asp-controller="Main" asp-action="NewProject">Добавить новый проект</a>
         <br>
     }
     <a class="btn btn-primary mb-3" asp-area="Admin" asp-controller="Main" asp-action="NewDate">Добавить новую дату</a>    
@@ -21,9 +21,9 @@
             @foreach(var date in Model)
             {
                 <tr>
-                    <td><p>@date.DateTime:</p></td> 
-                    <td><a class="btn btn-primary mb-3" asp-area="Admin" asp-controller="Projects" asp-action="Index" asp-route-id="@date.Id">Проекты</a></td>
-                    <td><a class="btn btn-primary" asp-area="Admin" asp-controller="Main" asp-action="Votes" asp-route-id="@date.Id">Голоса</a></td>
+                    <td><p>@date.DateTime.ToShortDateString()</p></td> 
+                    <td><a class="btn btn-info mb-3" asp-area="Admin" asp-controller="Projects" asp-action="Index" asp-route-id="@date.Id">Проекты</a></td>
+                    <td><a class="btn btn-success" asp-area="Admin" asp-controller="Main" asp-action="Votes" asp-route-id="@date.Id">Голоса</a></td>
                     <td><a class="btn btn-primary" asp-area="Admin" asp-controller="Main" asp-action="Results" asp-route-id="@date.Id">Результаты</a></td>
                     <td><a class="btn btn-danger" asp-area="Admin" asp-controller="Main" asp-action="Delete" asp-route-id="@date.Id">Удалить</a></td>
                 </tr>

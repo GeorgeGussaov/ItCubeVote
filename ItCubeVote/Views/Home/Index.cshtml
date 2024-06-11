@@ -1,7 +1,15 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Python парад";
 }
 @model UserViewModel
+<div class="text-center">
+    <h1>Python-парад</h1>
+    <h2>@ViewBag.CurrentDate</h2>
+    <br>
+    <p>Добро пожаловать на страницу для голосования за проекты.</p>
+    <p>Представьтесь, чтобы проголосовать.</p>
+</div>
+<br>
 <form method="post" asp-area="" asp-controller="Home" asp-action="Login">
     <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
     <div class="text-center">
@@ -20,7 +28,7 @@
             <span asp-validation-for="School"></span>
         </div>
         <br>
-        <select class="form-select-sm" name="Class" asp-for="Class">
+        <select class="form-select form-select-lg mb-3" name="Class" asp-for="Class">
 			<option value="@null" selected>Выбрать класс</option>
 			<option value="1">1</option>
 			<option value="2">2</option>
@@ -33,6 +41,7 @@
             <option value="9">9</option>
 			<option value="10">10</option>
 			<option value="11">11</option>
+            <option value="Teacher">Учитель</option>
 			<option value="Parent">Родитель</option>
             <option value="Student">Студент</option>
             <option value="Other">Другое</option>

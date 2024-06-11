@@ -21,14 +21,17 @@ namespace ItCubeVote.Controllers
 	{
 		private readonly IProjects projectsDb;
 		private readonly IUsers usersDb;
-		public HomeController(IProjects projects, IUsers users) 
+		private readonly IDates datesDb;
+		public HomeController(IProjects projects, IUsers users, IDates dates) 
 		{
 			this.projectsDb = projects;
 			usersDb = users;
+			datesDb = dates;
 		}
 
 		public IActionResult Index()
 		{
+			ViewBag.CurrentDate = datesDb.GetCurrentDate().DateTime.ToShortDateString();
 			var Cookie = Request.Cookies["user"];
 			if(Cookie == null) return View();
 			return RedirectToAction("Index", "Vote");
