@@ -14,9 +14,9 @@ namespace ItCubeVote.Areas.Admin.Controllers
 	public class ProjectsController : Controller
 	{
 		private readonly IProjects projectsDb;
-		private readonly IDates datesDb;
+		private readonly IEvents datesDb;
 		private readonly IWebHostEnvironment appEnvironment;
-		public ProjectsController(IProjects projects, IDates dates, IWebHostEnvironment app)
+		public ProjectsController(IProjects projects, IEvents dates, IWebHostEnvironment app)
 		{
 			projectsDb = projects;
 			datesDb = dates;
@@ -91,7 +91,7 @@ namespace ItCubeVote.Areas.Admin.Controllers
 					SecondAuthor = project.SecondAuthor,
 					Description = project.Description,
 					GitLink = project.GitLink,
-					ImgPath = "/image/projects/" + fileName
+					ImgPath = "/images/projects/" + fileName
 				};
 
 				var curDate = datesDb.GetCurrentDate().Id;

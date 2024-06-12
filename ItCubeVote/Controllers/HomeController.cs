@@ -21,8 +21,8 @@ namespace ItCubeVote.Controllers
 	{
 		private readonly IProjects projectsDb;
 		private readonly IUsers usersDb;
-		private readonly IDates datesDb;
-		public HomeController(IProjects projects, IUsers users, IDates dates) 
+		private readonly IEvents datesDb;
+		public HomeController(IProjects projects, IUsers users, IEvents dates) 
 		{
 			this.projectsDb = projects;
 			usersDb = users;
@@ -31,12 +31,20 @@ namespace ItCubeVote.Controllers
 
 		public IActionResult Index()
 		{
-			ViewBag.CurrentDate = datesDb.GetCurrentDate().DateTime.ToShortDateString();
-			var Cookie = Request.Cookies["user"];
-			if(Cookie == null) return View();
-			return RedirectToAction("Index", "Vote");
+			if (datesDb.GetCurrentDate() != null)
+			{
+				ViewBag.CurrentDate = datesDb.GetCurrentDate().DateTime.ToShortDateString();
+				var Cookie = Request.Cookies["user"];
+				if (Cookie == null) return View();
+				return RedirectToAction("Index", "Vote");
+			}
+			return RedirectToAction("NoDates");
 		}
 
+		public IActionResult NoDates()
+		{
+			return View();
+		}
 
 		public IActionResult Privacy()
 		{

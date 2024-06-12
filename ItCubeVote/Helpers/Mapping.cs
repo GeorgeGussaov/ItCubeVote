@@ -150,9 +150,9 @@ namespace ItCubeVote.Helpers
 		
 
 
-		public static Date ToDate(DateViewModel date)
+		public static Event ToEvent(EventViewModel date)
 		{
-			return new Date() 
+			return new Event() 
 			{
 				Id=date.Id,
 				DateTime = date.DateTime,
@@ -160,12 +160,12 @@ namespace ItCubeVote.Helpers
 				//Projects = ToProjects(date.Projects)
 			};
 		}
-		public static List<DateViewModel> ToDatesViewModel(List<Date> dates)
+		public static List<EventViewModel> ToEventsViewModel(List<Event> dates)
 		{
-			var result = new List<DateViewModel>();
+			var result = new List<EventViewModel>();
 			foreach(var date in dates)
 			{
-				result.Add(new DateViewModel()
+				result.Add(new EventViewModel()
 				{
 					Id = date.Id,
 					DateTime = date.DateTime,

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ItCubeVote.Models
 {
-	public class DateViewModel
+	public class EventViewModel
 	{
 		public Guid Id { get; set; }
 		[Required(ErrorMessage ="Вы не указали дату!")]

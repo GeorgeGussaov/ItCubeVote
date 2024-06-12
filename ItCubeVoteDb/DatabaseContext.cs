@@ -12,10 +12,10 @@ namespace ItCubeVoteDb
         public DbSet<Project> Projects { get; set; }
         public DbSet<Vote> Votes { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Date> Dates { get; set; }
+        public DbSet<Event> Events { get; set; }
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            Database.Migrate();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

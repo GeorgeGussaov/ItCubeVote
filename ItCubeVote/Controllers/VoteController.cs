@@ -12,8 +12,8 @@ namespace ItCubeVote.Controllers
 		private readonly IProjects projectsDb;
 		private readonly IVotes votesDb;
 		private readonly IUsers usersDb;
-		private readonly IDates datesDb;
-		public VoteController(IProjects projects, IVotes votes, IUsers users, IDates dates)
+		private readonly IEvents datesDb;
+		public VoteController(IProjects projects, IVotes votes, IUsers users, IEvents dates)
 		{
 			projectsDb = projects;
 			votesDb = votes;

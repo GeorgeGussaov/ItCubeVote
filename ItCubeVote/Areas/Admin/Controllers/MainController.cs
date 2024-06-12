@@ -19,10 +19,10 @@ namespace ItCubeVote.Areas.Admin.Controllers
 	public class MainController : Controller
 	{
 		private readonly IProjects projectsDb;
-		private readonly IDates datesDb;
+		private readonly IEvents datesDb;
 		private readonly IUsers usersDb;
 		private readonly IWebHostEnvironment appEnvironment;
-		public MainController(IProjects projects, IDates dates, IUsers users, IWebHostEnvironment app)
+		public MainController(IProjects projects, IEvents dates, IUsers users, IWebHostEnvironment app)
 		{
 			projectsDb= projects;
 			datesDb= dates;
@@ -47,7 +47,7 @@ namespace ItCubeVote.Areas.Admin.Controllers
 			if (Cookie == null) return RedirectToAction("Warning", "Main");
 
 			var dates = datesDb.GetDates().OrderBy(x => x.DateTime).Reverse().ToList();
-			return View(Mapping.ToDatesViewModel(dates));
+			return View(Mapping.ToEventsViewModel(dates));
 		}
 
 		public IActionResult NewProject()
@@ -177,14 +177,14 @@ namespace ItCubeVote.Areas.Admin.Controllers
 			}
 			return View("NewProject");
 		}
-        public IActionResult AddDate(DateViewModel date)
+        public IActionResult AddDate(EventViewModel date)
         {
 			var Cookie = Request.Cookies["admin"];
 			if (Cookie == null) return RedirectToAction("Warning", "Main");
 
 			if (ModelState.IsValid)
 			{
-				var dates = Mapping.ToDatesViewModel(datesDb.GetDates());
+				var dates = Mapping.ToEventsViewModel(datesDb.GetDates());
 				foreach(var item in dates)
 				{
 					if(item.DateTime > date.DateTime)	//ну по тексту ошибки понятно зачем этот форич
@@ -193,7 +193,7 @@ namespace ItCubeVote.Areas.Admin.Controllers
 						return View("NewDate");
 					}
 				}
-				datesDb.Add(Mapping.ToDate(date));
+				datesDb.Add(Mapping.ToEvent(date));
 				return RedirectToAction("Index");
 			}
             return View("NewDate");
