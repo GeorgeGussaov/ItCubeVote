@@ -68,6 +68,7 @@ namespace ItCubeVote.Areas.Admin.Controllers
 
 		public IActionResult Votes(Guid id)
 		{
+			ViewBag.CurrentDate = datesDb.TryGetDateById(id).DateTime.ToShortDateString();
 			var Cookie = Request.Cookies["admin"];
 			if (Cookie == null) return RedirectToAction("Warning", "Main");
 
@@ -79,6 +80,7 @@ namespace ItCubeVote.Areas.Admin.Controllers
 
 		public IActionResult Results(Guid id)
 		{
+			ViewBag.CurrentDate = datesDb.TryGetDateById(id).DateTime.ToShortDateString();
 			var Cookie = Request.Cookies["admin"];
 			if (Cookie == null) return RedirectToAction("Warning", "Main");		//результаты пока что только для админа
 
@@ -128,7 +130,7 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				if (admin.Login != "Admin" && admin.Password != "Admin")
+				if (admin.Login != "Admin" || admin.Password != "Admin")
 				{
 					ModelState.AddModelError("", "Введен неправильный логин или пароль");
 					return View("Login");

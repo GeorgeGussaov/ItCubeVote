@@ -8,7 +8,7 @@ namespace ItCubeVote.Controllers
 	public class ProjectController : Controller
 	{
 		private readonly IProjects projectsDb;
-		public ProjectController(IProjects projects)
+		public ProjectController(IProjects projects, IEvents datesDb)
 		{
 			projectsDb = projects;
 		}

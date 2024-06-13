@@ -24,6 +24,7 @@ namespace ItCubeVote.Areas.Admin.Controllers
 		}
 		public IActionResult Index(Guid id)
 		{
+			ViewBag.CurrentDate = datesDb.TryGetDateById(id).DateTime.ToShortDateString();
 			var Cookie = Request.Cookies["admin"];
 			if (Cookie == null) return RedirectToAction("Warning", "Main");
 

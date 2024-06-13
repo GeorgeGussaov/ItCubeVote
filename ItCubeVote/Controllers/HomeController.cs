@@ -33,15 +33,16 @@ namespace ItCubeVote.Controllers
 		{
 			if (datesDb.GetCurrentDate() != null)
 			{
+				//if(DateTime.Now.ToShortDateString() != datesDb.GetCurrentDate().DateTime.ToShortDateString()) return RedirectToAction("NoEvents");
 				ViewBag.CurrentDate = datesDb.GetCurrentDate().DateTime.ToShortDateString();
 				var Cookie = Request.Cookies["user"];
 				if (Cookie == null) return View();
 				return RedirectToAction("Index", "Vote");
 			}
-			return RedirectToAction("NoDates");
+			return RedirectToAction("NoEvents");
 		}
 
-		public IActionResult NoDates()
+		public IActionResult NoEvents()
 		{
 			return View();
 		}
