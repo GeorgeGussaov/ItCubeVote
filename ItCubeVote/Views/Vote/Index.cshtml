@@ -41,7 +41,7 @@
 	let cnt = 0;
 	document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
 		checkbox.addEventListener('change', function() {
-			let selectedNomination = this.dataset.nomination;
+			//let selectedNomination = this.dataset.nomination;
 			let projectName = this.name;
 			let currentId = this.id;
 			cnt = 0;
@@ -49,7 +49,7 @@
 			
 
 			document.querySelectorAll('input[name="' + projectName + '"]').forEach(function(input) {	//каюсь, скрипт взят с gpt ибо с js не работал очень давно.
-				if (input !== checkbox && input.dataset.nomination === selectedNomination) {			//еслиб начал проект делать раньше подумал бы над задачей сам, честно.
+				if (input !== checkbox /*&& input.dataset.nomination === selectedNomination*/) {			//еслиб начал проект делать раньше подумал бы над задачей сам, честно.
 					input.checked = false;
 				}
 			});

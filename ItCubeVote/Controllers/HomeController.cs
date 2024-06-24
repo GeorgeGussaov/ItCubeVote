@@ -67,7 +67,7 @@ namespace ItCubeVote.Controllers
 				usersDb.Add(Mapping.ToUser(user));
 
 				CookieOptions cookie = new CookieOptions();
-				cookie.Expires = DateTime.Now.AddDays(1);
+				cookie.Expires = DateTime.Now.AddYears(5);
 				Response.Cookies.Append("user", user.Id.ToString(), cookie);
 
 				return RedirectToAction("Index", "Vote");
